@@ -2,6 +2,7 @@ import json
 from flask import Flask, request
 from serve import get_keys
 import numpy as np
+import pandas as pd
 #from serve import get_keywords_api
 # I've commented out the last import because it won't work in kernels, 
 # but you should uncomment it when we build our app tomorrow
@@ -20,7 +21,10 @@ def extractpackages():
     their indices and then returns them as a json file.
     """
     # the data the user input, in json format
-    input_data = request.args
+    input_data = pd.DataFrame(request.json)
+    jdata = json.loads(apiTestJson)
+    query_df = pd.DataFrame(jdata)
+    
     Y = np.array([float(input_data['feature1']), float(input_data['feature2']), float(input_data['feature3']), float(input_data['feature4'])])
 
     # use our API function to get the keywords
