@@ -5,7 +5,6 @@ from flask import Flask
 from flask_restful import reqparse, Api, Resource
 import numpy as np
 from sklearn.model_selection import RandomizedSearchCV
-import pandas
 import xgboost
 
 
