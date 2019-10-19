@@ -1,0 +1,48 @@
+openapi: "3.0.0"
+
+info:
+  title: "autoML API"
+  description: "API that accepts a text string and returns a model result."
+  version: "1.5"
+  
+servers:
+  - url: https://tpfauv001.herokuapp.com
+    description: heroku app server
+
+paths:
+  /extractpackages:
+  
+    get:
+      summary: Get a user by ID
+      parameters:
+        - in: query
+          name: feature1
+          schema:
+            type: number
+          required: true
+          description: Numeric ID of the user to get
+        - in: query
+          name: feature2
+          schema:
+            type: number
+          required: true
+          description: Numeric ID of the user to get
+        - in: query
+          name: feature3
+          schema:
+            type: number
+          required: true
+          description: Numeric ID of the user to get
+        - in: query
+          name: feature4
+          schema:
+            type: number
+          required: true
+          description: Numeric ID of the user to get
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
