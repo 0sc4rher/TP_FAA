@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 
 info:
-  title: "autoML API"
+  title: "autoML API v2"
   description: "API that accepts a text string and returns a model result."
   version: "1.5"
   
