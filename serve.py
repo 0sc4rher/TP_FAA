@@ -12,6 +12,6 @@ import xgboost
 def get_keys():
         clf = load('modelapi.joblib')
         def keywords_api(X):
-                y_pred = str(clf.predict([X]))
+                y_pred = str(clf.predict(X))
                 return y_pred
         return keywords_api
