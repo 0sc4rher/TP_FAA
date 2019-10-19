@@ -1,0 +1,8 @@
+gunicorn
+flask
+sklearn
+joblib
+numpy
+flask_restful
+xgboost
+pandas
