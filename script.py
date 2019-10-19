@@ -21,14 +21,20 @@ def extractpackages():
     their indices and then returns them as a json file.
     """
     # the data the user input, in json format
-    input_data = pd.DataFrame(request.json)
-    jdata = json.loads(apiTestJson)
-    query_df = pd.DataFrame(jdata)
-    
-    Y = np.array([float(input_data['feature1']), float(input_data['feature2']), float(input_data['feature3']), float(input_data['feature4'])])
-
+    model_columns = load('model_columns.joblib')
+    query_df = pd.DataFrame(request.json)
+    query_df=query_df.drop(['phone number','total day minutes','total eve minutes','total night minutes','total intl minutes' ],axis=1)
+    query_df=query_df.drop(['churn'],axis=1)
+    stateq=pd.get_dummies(query_df['state'],drop_first=True)
+    intplanq=pd.get_dummies(query_df['international plan'],drop_first=True)
+    vmplanq=pd.get_dummies(query_df['voice mail plan'],drop_first=True)
+    intplanq = intplanq.rename(columns={'yes':'intplan'})
+    vmplanq = vmplanq.rename(columns={'yes':'vmplan'})
+    query_df=query_df.drop(['state','international plan','voice mail plan'],axis=1)
+    query_df=pd.concat([query_df,stateq,intplanq,vmplanq],axis=1)
+    query_df = query_df.reindex(columns=model_columns, fill_value=0)
     # use our API function to get the keywords
-    output_data = keys(Y)
+    output_data = keys(query_df)
     # convert our dictionary into a .json file
     # (returning a dictionary wouldn't be very
     # helpful for someone querying our API from
